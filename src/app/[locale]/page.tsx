@@ -15,7 +15,11 @@
 import { redirect } from "@/i18n/navigation";
 import { getDefaultSlug } from "@/lib/getDefaultSlug";
 
-export default async function Home({ params }: { params: { locale: string } }) {
+interface Params {
+  locale: string;
+}
+
+export default async function Home({ params }: { params: Params }) {
   const slug = await getDefaultSlug();
 
   redirect({ href: `/${slug}`, locale: params.locale });
