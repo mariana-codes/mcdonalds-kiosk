@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { usePathname, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 import { z } from "zod";
@@ -26,6 +25,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { isValidCpf, removeCpfPunctuation } from "@/helpers/cpf";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 const formSchema = z.object({
   cpf: z

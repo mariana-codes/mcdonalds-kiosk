@@ -1,24 +1,25 @@
 "use client";
 
-import { Restaurant } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { ChevronLeftIcon, ScrollTextIcon } from "lucide-react";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import { useRouter } from "@/i18n/navigation";
 
-interface RestaurantHeaderProps {
-  restaurant: Pick<Restaurant, "coverImageUrl" | "name">;
+interface ProductHeaderProps {
+  product: Pick<Product, "name" | "imageUrl">;
 }
 
-const RestaurantHeader = ({ restaurant }: RestaurantHeaderProps) => {
+const ProductHeader = ({ product }: ProductHeaderProps) => {
   const { slug } = useParams<{ slug: string }>();
   const router = useRouter();
   const handleBackClick = () => router.back();
   const handleOrdersClick = () => router.push(`/${slug}/orders`);
 
   return (
-    <div className="relative h-[250px] w-full">
+    <div className="relative min-h-[300px] w-full">
       <Button
         variant="secondary"
         size="icon"
@@ -28,12 +29,11 @@ const RestaurantHeader = ({ restaurant }: RestaurantHeaderProps) => {
         <ChevronLeftIcon />
       </Button>
       <Image
-        src={restaurant.coverImageUrl}
+        src={product.imageUrl}
+        alt={product.name}
         fill
-        alt={restaurant.name}
-        className="object-cover"
+        className="object-contain"
       />
-
       <Button
         onClick={handleOrdersClick}
         variant="secondary"
@@ -46,4 +46,4 @@ const RestaurantHeader = ({ restaurant }: RestaurantHeaderProps) => {
   );
 };
 
-export default RestaurantHeader;
+export default ProductHeader;

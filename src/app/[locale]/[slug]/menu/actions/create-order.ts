@@ -2,9 +2,10 @@
 
 import { ConsumptionMethod } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 
 import { removeCpfPunctuation } from "@/helpers/cpf";
+import { redirect } from "@/i18n/navigation";
 import { db } from "@/lib/prisma";
 
 interface CreateOrderInput {
@@ -16,6 +17,7 @@ interface CreateOrderInput {
 }
 
 export const createOrder = async (input: CreateOrderInput) => {
+  const locale = await getLocale();
   const restaurant = await db.restaurant.findUnique({
     where: {
       slug: input.slug,
@@ -59,7 +61,8 @@ export const createOrder = async (input: CreateOrderInput) => {
     },
   });
   revalidatePath(`/${input.slug}/orders`);
-  redirect(
-    `/${input.slug}/orders?cpf=${removeCpfPunctuation(input.customerCpf)}`,
-  );
+  redirect({
+    href: `/${input.slug}/orders?cpf=${removeCpfPunctuation(input.customerCpf)}`,
+    locale: locale,
+  });
 };
