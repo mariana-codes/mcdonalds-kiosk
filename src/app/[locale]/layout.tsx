@@ -2,12 +2,10 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
 import { Toaster } from "@/components/ui/sonner";
-import { routing } from "@/i18n/routing";
 
 import { CartProvider } from "./[slug]/menu/contexts/cart";
 
@@ -29,12 +27,6 @@ export default async function RootLayout({
 }>) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (!routing.locales.includes(locale as any)) {
-    //TODO: notFound not working, not using not-found.tsx
-    notFound();
-  }
 
   // Providing all messages to the client
   // side is the easiest way to get started

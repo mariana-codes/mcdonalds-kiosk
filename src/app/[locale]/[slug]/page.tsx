@@ -1,18 +1,25 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import { routing } from "@/i18n/routing";
 import { db } from "@/lib/prisma";
 
 import ConsumptionMethodOption from "./components/consumption-method-option";
 interface RestaurantPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 const RestaurantPage = async (props: RestaurantPageProps) => {
   const { params } = props;
-  const { slug } = await params;
+  const { slug, locale } = await params;
 
   const restaurant = await db.restaurant.findUnique({ where: { slug } });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!routing.locales.includes(locale as any)) {
+    console.log(locale);
+    notFound();
+  }
 
   if (!restaurant) {
     return notFound();
