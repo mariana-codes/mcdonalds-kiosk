@@ -1,11 +1,11 @@
 import "./globals.css";
 
-import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
 import { Toaster } from "@/components/ui/sonner";
+import { db } from "@/lib/prisma";
 
 import { CartProvider } from "./[slug]/menu/contexts/cart";
 
@@ -13,10 +13,17 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
-export const metadata: Metadata = {
-  title: "W Ronalds",
-  description: "Fast and Good Food",
-};
+
+export async function generateMetadata() {
+  const restaurant = await db.restaurant.findFirst({
+    select: { name: true, description: true },
+    orderBy: { createdAt: "asc" },
+  });
+  return {
+    title: restaurant?.name,
+    description: restaurant?.description,
+  };
+}
 
 export default async function RootLayout({
   children,
