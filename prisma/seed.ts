@@ -9,9 +9,9 @@ const main = async () => {
     await tx.restaurant.deleteMany();
     const restaurant = await tx.restaurant.create({
       data: {
-        name: "Speedy Burgers",
-        slug: "speedy-burgers",
-        description: "O hambúrguer mais rápido e saboroso da cidade!",
+        name: "McDonald's",
+        slug: "mcdonalds",
+        description: "Os hambúrgueres mais famosos do mundo!",
         avatarImageUrl:
           "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQvcNP9rHlEJu1vCY5kLqzjf29HKaeN78Z6pRy",
         coverImageUrl:
@@ -27,38 +27,38 @@ const main = async () => {
     await tx.product.createMany({
       data: [
         {
-          name: "Mega Speedy Duplo",
+          name: "Big Mac",
           description:
-            "Dois hambúrgueres de carne de bovino, queijo cheddar derretido, alface crocante, tomate fresco e molho especial. Acompanhado de batatas fritas e refrigerante.",
+            "Dois hambúrgueres de carne de bovino, queijo cheddar, alface, pickles, cebola e molho especial no pão com sementes de sésamo. Inclui batatas fritas e bebida.",
           price: 8.99,
           imageUrl:
             "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQaHB8tslkBUjlHSKiuseLm2hIFzVY0OtxEPnw",
           menuCategoryId: combosCategory.id,
           restaurantId: restaurant.id,
           ingredients: [
-            "Pão brioche",
+            "Pão com sementes de sésamo",
             "Dois hambúrgueres de bovino",
             "Queijo cheddar",
             "Alface",
-            "Tomate",
+            "Pickles",
+            "Cebola",
             "Molho especial",
           ],
         },
         {
-          name: "Speedy Chicken Supreme",
+          name: "McChicken",
           description:
-            "Peito de frango panado crocante, queijo derretido, alface e molho de alho, no pão brioche. Inclui batatas fritas e bebida à escolha.",
+            "Peito de frango panado, alface e maionese no pão com sementes de sésamo. Inclui batatas fritas e bebida.",
           price: 7.99,
           imageUrl:
             "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQWdq0w8niS9XCLQu7Nb4jvBYZze16goaOqsKR",
           menuCategoryId: combosCategory.id,
           restaurantId: restaurant.id,
           ingredients: [
-            "Pão brioche",
+            "Pão com sementes de sésamo",
             "Peito de frango panado",
-            "Queijo cheddar",
             "Alface",
-            "Molho de alho",
+            "Maionese",
           ],
         },
       ],
@@ -72,8 +72,8 @@ const main = async () => {
     await tx.product.createMany({
       data: [
         {
-          name: "Batatas Fritas Clássicas",
-          description: "Batatas fritas crocantes, feitas na hora!",
+          name: "Batatas Fritas Médias",
+          description: "Batatas fritas crocantes e douradas!",
           ingredients: [],
           price: 3.99,
           imageUrl:
@@ -82,9 +82,8 @@ const main = async () => {
           restaurantId: restaurant.id,
         },
         {
-          name: "Onion Rings",
-          description:
-            "Deliciosos anéis de cebola panados e fritos até ficarem dourados.",
+          name: "Batatas Fritas Grandes",
+          description: "Batatas fritas crocantes e douradas!",
           ingredients: [],
           price: 4.5,
           imageUrl:
@@ -114,8 +113,8 @@ const main = async () => {
           restaurantId: restaurant.id,
         },
         {
-          name: "Sumo de Laranja Natural",
-          description: "Sumo de laranja natural, feito na hora!",
+          name: "Fanta Laranja",
+          description: "Refrigerante de laranja.",
           ingredients: [],
           price: 3.0,
           imageUrl:
@@ -140,14 +139,12 @@ const main = async () => {
           price: 2.99,
           imageUrl:
             "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQtfuQrAKkI75oJfPT0crZxvX82ui9qV3hLFdY",
-
           menuCategoryId: dessertsCategory.id,
           restaurantId: restaurant.id,
         },
         {
-          name: "Brownie de Chocolate",
-          description:
-            "Brownie quente e húmido, perfeito para os amantes de chocolate!",
+          name: "Gelado de Chocolate",
+          description: "Gelado cremoso de chocolate servido num cone crocante.",
           ingredients: [],
           price: 3.5,
           imageUrl:
