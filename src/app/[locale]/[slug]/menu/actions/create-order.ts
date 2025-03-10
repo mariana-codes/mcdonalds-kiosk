@@ -4,13 +4,13 @@ import { ConsumptionMethod } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { getLocale } from "next-intl/server";
 
-import { removeCpfPunctuation } from "@/helpers/cpf";
+import { removeNifPunctuation } from "@/helpers/nif";
 import { redirect } from "@/i18n/navigation";
 import { db } from "@/lib/prisma";
 
 interface CreateOrderInput {
   customerName: string;
-  customerCpf: string;
+  customerNif: string;
   products: Array<{ id: string; quantity: number }>;
   consumptionMethod: ConsumptionMethod;
   slug: string;
@@ -45,8 +45,8 @@ export const createOrder = async (input: CreateOrderInput) => {
   await db.order.create({
     data: {
       status: "PENDING",
-      customerName: input.customerCpf,
-      customerCpf: removeCpfPunctuation(input.customerCpf),
+      customerName: input.customerName,
+      customerNif: removeNifPunctuation(input.customerNif),
       orderProducts: {
         createMany: {
           data: productsWithPricesAndQuantities,
@@ -62,7 +62,7 @@ export const createOrder = async (input: CreateOrderInput) => {
   });
   revalidatePath(`/${input.slug}/orders`);
   redirect({
-    href: `/${input.slug}/orders?cpf=${removeCpfPunctuation(input.customerCpf)}`,
+    href: `/${input.slug}/orders?nif=${removeNifPunctuation(input.customerNif)}`,
     locale: locale,
   });
 };

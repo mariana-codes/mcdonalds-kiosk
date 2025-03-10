@@ -24,22 +24,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { isValidCpf, removeCpfPunctuation } from "@/helpers/cpf";
+import { isValidNif, removeNifPunctuation } from "@/helpers/nif";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
 const formSchema = z.object({
-  cpf: z
+  nif: z
     .string()
     .trim()
     .min(1, {
-      message: "CPF obrigatório",
+      message: "NIF obrigatório",
     })
-    .refine((value) => isValidCpf(value), { message: "CPF inválido" }),
+    .refine((value) => isValidNif(value), { message: "NIF inválido" }),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
 
-const CpfForm = () => {
+const NifForm = () => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
   });
@@ -48,7 +48,7 @@ const CpfForm = () => {
   const pathname = usePathname();
 
   const onSubmit = (data: FormSchema) => {
-    router.replace(`${pathname}?cpf=${removeCpfPunctuation(data.cpf)}`);
+    router.replace(`${pathname}?nif=${removeNifPunctuation(data.nif)}`);
   };
   const handleCancel = () => router.back();
 
@@ -58,7 +58,7 @@ const CpfForm = () => {
         <DrawerHeader>
           <DrawerTitle>Visualizar Pedidos</DrawerTitle>
           <DrawerDescription>
-            Introduza o seu CFF abaixo para visualizar os seus pedidos
+            Introduza o seu NIF abaixo para visualizar os seus pedidos
           </DrawerDescription>
         </DrawerHeader>
         <div>
@@ -66,14 +66,14 @@ const CpfForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name="cpf"
+                name="nif"
                 render={({ field }) => (
                   <FormItem className="px-4">
-                    <FormLabel>O seu CPF</FormLabel>
+                    <FormLabel>O seu NIF</FormLabel>
                     <FormControl>
                       <PatternFormat
-                        placeholder="Introduza o seu cpf"
-                        format="###.###.###-##"
+                        placeholder="Introduza o seu NIF"
+                        format="###.###.###"
                         customInput={Input}
                         {...field}
                       />
@@ -108,4 +108,4 @@ const CpfForm = () => {
   );
 };
 
-export default CpfForm;
+export default NifForm;

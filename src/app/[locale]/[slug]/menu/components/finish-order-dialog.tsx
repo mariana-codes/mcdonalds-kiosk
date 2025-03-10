@@ -29,20 +29,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { isValidCpf } from "@/helpers/cpf";
+import { isValidNif } from "@/helpers/nif";
 
 import { createOrder } from "../actions/create-order";
 import { CartContext } from "../contexts/cart";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, { message: "O nome é obrigatório" }),
-  cpf: z
+  nif: z
     .string()
     .trim()
     .min(1, {
-      message: "CPF obrigatório",
+      message: "NIF obrigatório",
     })
-    .refine((value) => isValidCpf(value), { message: "CPF inválido" }),
+    .refine((value) => isValidNif(value), { message: "NIF inválido" }),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
@@ -61,7 +61,7 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      cpf: "",
+      nif: "",
     },
     shouldUnregister: true,
   });
@@ -75,7 +75,7 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
       startTransition(async () => {
         await createOrder({
           consumptionMethod,
-          customerCpf: data.cpf,
+          customerNif: data.nif,
           customerName: data.name,
           products,
           slug,
@@ -117,14 +117,14 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
               />
               <FormField
                 control={form.control}
-                name="cpf"
+                name="nif"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>O seu CPF</FormLabel>
+                    <FormLabel>O seu NIF</FormLabel>
                     <FormControl>
                       <PatternFormat
-                        placeholder="Introduza o seu cpf"
-                        format="###.###.###-##"
+                        placeholder="Introduza o seu NIF"
+                        format="###.###.###"
                         customInput={Input}
                         {...field}
                       />

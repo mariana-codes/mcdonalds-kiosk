@@ -1,22 +1,22 @@
-import { isValidCpf, removeCpfPunctuation } from "@/helpers/cpf";
+import { isValidNif, removeNifPunctuation } from "@/helpers/nif";
 import { db } from "@/lib/prisma";
 
-import CpfForm from "./components/cpf-form";
+import NifForm from "./components/nif-form";
 import OrderList from "./components/order-list";
 
 interface OrdersPageProps {
-  searchParams: Promise<{ cpf: string }>;
+  searchParams: Promise<{ nif: string }>;
 }
 
 const Orders = async ({ searchParams }: OrdersPageProps) => {
-  const { cpf } = await searchParams;
+  const { nif } = await searchParams;
 
-  if (!cpf) {
-    return <CpfForm />;
+  if (!nif) {
+    return <NifForm />;
   }
 
-  if (!isValidCpf(cpf)) {
-    return <CpfForm />;
+  if (!isValidNif(nif)) {
+    return <NifForm />;
   }
 
   const orders = await db.order.findMany({
@@ -24,7 +24,7 @@ const Orders = async ({ searchParams }: OrdersPageProps) => {
       createdAt: "desc",
     },
     where: {
-      customerCpf: removeCpfPunctuation(cpf),
+      customerNif: removeNifPunctuation(nif),
     },
     include: {
       restaurant: {
