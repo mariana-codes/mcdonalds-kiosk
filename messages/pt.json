@@ -1,6 +1,12 @@
 {
   "HomePage": {
-    "title": "Ola",
-    "about": "Sobre"
+    "title": "Bem-vindo!",
+    "description": "Escolha como prefere aproveitar a sua refeição.",
+    "dinein-button": "Para comer no restaurante",
+    "takeaway-button": "Para levar"
+  },
+  "Locales": {
+    "pt": "Português",
+    "en": "Inglês"
   }
 }

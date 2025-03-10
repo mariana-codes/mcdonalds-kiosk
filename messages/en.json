@@ -1,6 +1,12 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "title": "Welcome!",
+    "description": "Choose how you prefer to enjoy your meal.",
+    "dinein-button": "To eat in the restaurant",
+    "takeaway-button": "Take away"
+  },
+  "Locales": {
+    "pt": "Portuguese",
+    "en": "English"
   }
 }
