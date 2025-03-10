@@ -8,5 +8,9 @@
   "Locales": {
     "pt": "Portuguese",
     "en": "English"
+  },
+  "NotFound": {
+    "title": "404 - This page could not be found.",
+    "description": "The design of this page is under construction :-)"
   }
 }
