@@ -3,6 +3,7 @@
 import { OrderStatus, Prisma } from "@prisma/client";
 import { ChevronLeftIcon, ScrollTextIcon } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,16 +31,14 @@ interface OrderListProps {
   >;
 }
 
-const getStatusLabel = (status: OrderStatus) => {
-  if (status === "FINISHED") return "Finalizado";
-  if (status === "IN_PREPARATION") return "Em preparo";
-  if (status === "PENDING") return "Pendente";
-  return "";
-};
-
 const OrderList = ({ orders }: OrderListProps) => {
   const router = useRouter();
+  const t = useTranslations("OrderListPage");
   const handleBackClick = () => router.back();
+
+  const getStatusLabel = (status: OrderStatus) => {
+    return t(`order-status.${status}`) || "";
+  };
 
   return (
     <div className="space-y-6 p-6">
@@ -53,7 +52,7 @@ const OrderList = ({ orders }: OrderListProps) => {
       </Button>
       <div className="flex items-center gap-3">
         <ScrollTextIcon />
-        <h2 className="text-lg font-semibold">Os meus pedidos</h2>
+        <h2 className="text-lg font-semibold">{t("title")}</h2>
       </div>
 
       {orders.map((order) => (

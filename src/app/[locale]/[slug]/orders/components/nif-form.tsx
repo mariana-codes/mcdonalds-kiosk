@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 import { z } from "zod";
@@ -46,6 +47,7 @@ const NifForm = () => {
 
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("CheckOrderSDialog");
 
   const onSubmit = (data: FormSchema) => {
     router.replace(`${pathname}?nif=${removeNifPunctuation(data.nif)}`);
@@ -56,10 +58,8 @@ const NifForm = () => {
     <Drawer open>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Visualizar Pedidos</DrawerTitle>
-          <DrawerDescription>
-            Introduza o seu NIF abaixo para visualizar os seus pedidos
-          </DrawerDescription>
+          <DrawerTitle>{t("title")}</DrawerTitle>
+          <DrawerDescription>{t("description")}</DrawerDescription>
         </DrawerHeader>
         <div>
           <Form {...form}>
@@ -69,10 +69,10 @@ const NifForm = () => {
                 name="nif"
                 render={({ field }) => (
                   <FormItem className="px-4">
-                    <FormLabel>O seu NIF</FormLabel>
+                    <FormLabel>{t("nif-label")}</FormLabel>
                     <FormControl>
                       <PatternFormat
-                        placeholder="Introduza o seu NIF"
+                        placeholder={t("nif-placeholder")}
                         format="###.###.###"
                         customInput={Input}
                         {...field}
@@ -88,7 +88,7 @@ const NifForm = () => {
                   variant="destructive"
                   className="w-full rounded-full"
                 >
-                  Confirmar
+                  {t("submit-button")}
                 </Button>
                 <DrawerClose asChild>
                   <Button
@@ -96,7 +96,7 @@ const NifForm = () => {
                     variant="outline"
                     className="w-full rounded-full"
                   >
-                    Cancelar
+                    {t("cancel-button")}
                   </Button>
                 </DrawerClose>
               </DrawerFooter>

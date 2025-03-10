@@ -12,5 +12,48 @@
   "NotFound": {
     "title": "404 - Página não encontrada.",
     "description": "O design desta página está em construção :-)"
+  },
+  "ProductDetailPage": {
+    "about": "Sobre",
+    "ingredients": "Ingredientes",
+    "add-to-cart-button": "Adicionar ao carrinho"
+  },
+  "Cart": {
+    "cart": "Carrinho",
+    "total": "Total",
+    "checkout": "Finalizar pedido"
+  },
+  "ProductsCategoriesPage": {
+    "status": "Aberto!",
+    "order-total": "Total dos pedidos",
+    "view-cart": "Ver carrinho",
+    "item": "{count, plural, one {item} other {itens}}"
+  },
+  "FinishOrderDialog": {
+    "toast-sucess-message": "Pedido finalizado com sucesso",
+    "title": "Finalizar Pedido",
+    "description": "Insira as suas informações abaixo para finalizar o seu pedido.",
+    "name-label": "O seu nome",
+    "name-placeholder": "Introduza o seu nome",
+    "nif-label": "O seu NIF",
+    "nif-placeholder": "Introduza o seu NIF",
+    "submit-button": "Finalizar",
+    "cancel-button": "Cancelar"
+  },
+  "CheckOrderSDialog": {
+    "title": "Visualizar Pedidos",
+    "description": "Introduza o seu NIF abaixo para visualizar os seus pedidos",
+    "nif-label": "O seu NIF",
+    "nif-placeholder": "Introduza o seu NIF",
+    "submit-button": "Confirmar",
+    "cancel-button": "Cancelar"
+  },
+  "OrderListPage": {
+    "order-status": {
+      "FINISHED": "Finalizado",
+      "IN_PREPARATION": "A preparar",
+      "PENDING": "Pendente"
+    },
+    "title": "Os meus pedidos"
   }
 }

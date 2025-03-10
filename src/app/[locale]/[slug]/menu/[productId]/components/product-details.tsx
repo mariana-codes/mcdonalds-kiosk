@@ -3,6 +3,7 @@
 import { Prisma } from "@prisma/client";
 import { ChefHatIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useContext, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ interface ProductDetailsProps {
 const ProductDetails = ({ product }: ProductDetailsProps) => {
   const { toggleCart, addProduct } = useContext(CartContext);
   const [quantity, setQuantity] = useState<number>(1);
+  const t = useTranslations("ProductDetailPage");
 
   const handleDecreaseQuantity = () => {
     setQuantity((prev) => {
@@ -94,7 +96,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </div>
         <ScrollArea className="h-full">
           <div className="mt-6 space-y-3">
-            <h4 className="font-semibold">Sobre</h4>
+            <h4 className="font-semibold">{t("about")}</h4>
             <p className="text-sm text-muted-foreground">
               {product.description}
             </p>
@@ -103,7 +105,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           <div className="mt-6 space-y-3">
             <div className="flex items-center gap-1.5">
               <ChefHatIcon size={18} />
-              <h4 className="font-semibold">Ingredientes</h4>
+              <h4 className="font-semibold">{t("ingredients")}</h4>
             </div>
             <ul className="list-disc px-5 text-sm text-muted-foreground">
               {product.ingredients.map((ingredient) => (
@@ -114,7 +116,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </ScrollArea>
       </div>
       <Button onClick={handleAddToCart} className="w-full rounded-full">
-        Adicionar ao carrinho
+        {t("add-to-cart-button")}
       </Button>
       <CartSheet />
     </div>

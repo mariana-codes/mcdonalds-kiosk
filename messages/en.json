@@ -12,5 +12,48 @@
   "NotFound": {
     "title": "404 - This page could not be found.",
     "description": "The design of this page is under construction :-)"
+  },
+  "ProductDetailPage": {
+    "about": "About",
+    "ingredients": "Ingredients",
+    "add-to-cart-button": "Add to cart"
+  },
+  "Cart": {
+    "cart": "Cart",
+    "total": "Total",
+    "checkout": "Checkout"
+  },
+  "ProductsCategoriesPage": {
+    "status": "Open!",
+    "order-total": "Order total",
+    "view-cart": "View cart",
+    "item": "{count, plural, one {item} other {items}}"
+  },
+  "FinishOrderDialog": {
+    "toast-sucess-message": "Order successfully completed",
+    "title": "Checkout",
+    "description": "Enter your details below to finalise your order.",
+    "name-label": "Your name",
+    "name-placeholder": "Enter your name",
+    "nif-label": "Your NIF",
+    "nif-placeholder": "Enter your NIF",
+    "submit-button": "Finish",
+    "cancel-button": "Cancel"
+  },
+  "CheckOrderSDialog": {
+    "title": "View orders",
+    "description": "Enter your NIF below to view your orders.",
+    "nif-label": "Your NIF",
+    "nif-placeholder": "Enter your NIF",
+    "submit-button": "Confirm",
+    "cancel-button": "Cancel"
+  },
+  "OrderListPage": {
+    "order-status": {
+      "FINISHED": "Finished",
+      "IN_PREPARATION": "Preparing",
+      "PENDING": "Pending"
+    },
+    "title": "My Orders"
   }
 }

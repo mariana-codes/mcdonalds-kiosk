@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ConsumptionMethod } from "@prisma/client";
 import { Loader2Icon } from "lucide-react";
 import { useParams, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useContext, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
@@ -56,6 +57,7 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
   const { products } = useContext(CartContext);
   const { slug } = useParams<{ slug: string }>();
   const searchParams = useSearchParams();
+  const t = useTranslations("FinishOrderDialog");
   const [isPending, startTransition] = useTransition();
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -82,7 +84,7 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
         });
 
         onOpenChange(false);
-        toast.success("Pedido finalizado com sucesso");
+        toast.success(t("toast-sucess-message"));
       });
     } catch (error) {
       console.log(error);
@@ -93,10 +95,8 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Finalizar Pedido</DrawerTitle>
-          <DrawerDescription>
-            Insira as suas informações abaixo para finalizar o seu pedido.
-          </DrawerDescription>
+          <DrawerTitle>{t("title")}</DrawerTitle>
+          <DrawerDescription>{t("description")}</DrawerDescription>
         </DrawerHeader>
 
         <div className="p-5">
@@ -107,9 +107,9 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>O seu nome</FormLabel>
+                    <FormLabel>{t("name-label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Introduza o seu nome" {...field} />
+                      <Input placeholder={t("name-placeholder")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -120,10 +120,10 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
                 name="nif"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>O seu NIF</FormLabel>
+                    <FormLabel>{t("nif-label")}</FormLabel>
                     <FormControl>
                       <PatternFormat
-                        placeholder="Introduza o seu NIF"
+                        placeholder={t("nif-placeholder")}
                         format="###.###.###"
                         customInput={Input}
                         {...field}
@@ -141,11 +141,11 @@ const FinishOrderDialog = ({ onOpenChange, open }: FinishOrderDialogProps) => {
                   disabled={isPending}
                 >
                   {isPending && <Loader2Icon className="animate-spin" />}
-                  Finalizar
+                  {t("submit-button")}
                 </Button>
                 <DrawerClose asChild>
                   <Button variant="outline" className="w-full rounded-full">
-                    Cancelar
+                    {t("cancel-button")}
                   </Button>
                 </DrawerClose>
               </DrawerFooter>

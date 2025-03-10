@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { useContext, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -17,12 +18,13 @@ import FinishOrderDialog from "./finish-order-dialog";
 const CartSheet = () => {
   const [finishOrderDialogIsOpen, setFinishOrderDialogIsOpen] = useState(false);
   const { isOpen, toggleCart, products, total } = useContext(CartContext);
+  const t = useTranslations("Cart");
 
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
       <SheetContent className="w-[80%]">
         <SheetHeader>
-          <SheetTitle className="text-left">Carrinho</SheetTitle>
+          <SheetTitle className="text-left">{t("cart")}</SheetTitle>
         </SheetHeader>
         <div className="flex h-full flex-col py-5">
           <div className="flex-auto">
@@ -33,7 +35,7 @@ const CartSheet = () => {
           <Card className="mb-6">
             <CardContent className="p-5">
               <div className="flex justify-between">
-                <p className="text-sm text-muted-foreground">Total</p>
+                <p className="text-sm text-muted-foreground">{t("total")}</p>
                 <p className="text-sm font-semibold">{formatCurrency(total)}</p>
               </div>
             </CardContent>
@@ -42,7 +44,7 @@ const CartSheet = () => {
             onClick={() => setFinishOrderDialogIsOpen(true)}
             className="w-full rounded-full"
           >
-            Finalizar pedido
+            {t("checkout")}
           </Button>
           <FinishOrderDialog
             open={finishOrderDialogIsOpen}
